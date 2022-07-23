@@ -18,6 +18,11 @@ const routes: Routes = [
       import('./feature/game/game.module').then((m) => m.GameModule),
   },
   {
+    path: 'card',
+    loadChildren: () =>
+      import('./feature/card/card.module').then((m) => m.CardModule),
+  },
+  {
     path: '**',
     redirectTo: 'auth',
     pathMatch: 'full',
