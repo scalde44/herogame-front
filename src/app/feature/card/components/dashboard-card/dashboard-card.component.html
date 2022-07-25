@@ -1,0 +1,35 @@
+<div class="container">
+  <br /><br />
+  <h3>{{title}}</h3>
+  <br />
+
+  <button type="submit" class="btn btn-primary" (click)="createCard()">
+    Create
+  </button>
+  <br /><br />
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Power</th>
+        <th scope="col">Features</th>
+        <th scope="col">ImageUrl</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let card of cards" >
+        <th scope="row" (click)="updateCard(card.id)">{{ card.id }}</th>
+        <td>{{ card.name }}</td>
+        <td>{{ card.power }}</td>
+        <td>{{ card.features }}</td>
+        <td>{{ card.imageUrl }}</td>
+        <button type="button" class="btn btn-danger" (click)="deleteCard(card.id)" onclick="location.reload()">Delete</button>
+        
+      </tr>
+    </tbody>
+  </table>
+
+</div>
