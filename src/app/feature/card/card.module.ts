@@ -4,16 +4,17 @@ import { HttpClientModule} from '@angular/common/http'
 
 import { CardRoutingModule } from './card-routing.module';
 import { CreateCardComponent } from './components/create-card/create-card.component';
-import { DeleteCardComponent } from './components/delete-card/delete-card.component';
 import { UpdateCardComponent } from './components/update-card/update-card.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CardService } from './service/card.service';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 
 
 @NgModule({
   declarations: [
     CreateCardComponent,
-    DeleteCardComponent,
-    UpdateCardComponent
+    UpdateCardComponent,
+    DashboardCardComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +22,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule, 
     FormsModule,
     HttpClientModule
-  ]
+  ],
+  providers: [CardService]
 })
 export class CardModule { }

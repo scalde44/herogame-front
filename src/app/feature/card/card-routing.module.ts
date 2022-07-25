@@ -1,30 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateCardComponent } from './components/create-card/create-card.component';
-import { DeleteCardComponent } from './components/delete-card/delete-card.component';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 import { UpdateCardComponent } from './components/update-card/update-card.component';
 
 const routes: Routes = [
   {
+    path:'dashboard',
+    component: DashboardCardComponent,
+  },
+  {
     path: 'create',
     component: CreateCardComponent,
   },
+  
   {
-    path: 'delete',
-    component: DeleteCardComponent,
-  },
-  {
-    path: 'update',
+    path: 'update/:id',
     component: UpdateCardComponent,
   },
   {
     path: '',
-    redirectTo: 'create',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'create',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   }
 ];
