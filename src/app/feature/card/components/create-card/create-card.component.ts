@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {CardService} from '../../service/card.service';
+import {Card} from '../../models/objects/card';
 
 @Component({
   selector: 'app-create-card',
@@ -8,15 +10,53 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create-card.component.scss']
 })
 export class CreateCardComponent implements OnInit {
-
-  cardForm = new FormGroup({
-    name : new FormControl('', Validators.required),
-    power: new FormControl('',Validators.required )
-
-  })
-  constructor() { }
+ 
+  title: string = 'Create Card';
+  cardForm : FormGroup;
+  features : string[]= [];
+  constructor(
+    private cardService: CardService,
+    private router: Router,
+    private formBuilder: FormBuilder
+    
+    ) { }
 
   ngOnInit(): void {
+    this.createForm()
+  }
+  
+  createForm(){
+    
+  this.cardForm = this.formBuilder.group({
+    name: [null, [Validators.required]],
+    power: [null, [Validators.required]],
+    features: [null, [Validators.required]],
+    imageUrl: [null, [Validators.required]],
+    
+  });
+  }
+  createCard(){
+       
+    const card : Card={
+      name: this.cardForm.get('name')?.value,
+      power: this.cardForm.get('power')?.value,
+      features: this.features,
+      imageUrl: this.cardForm.get('imageUrl')?.value
+    }
+    
+    this.cardService.createCard(card).subscribe((data)=>{
+    (data)})
+  }
+  dashboard(){
+    this.router.navigate(['card/dashboard'])
+  }
+  
+  addFeature(){
+    this.features.push(this.cardForm.get('features')?.value);
+    console.log()
   }
 
+  
+
 }
+
