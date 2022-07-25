@@ -1,1 +1,31 @@
-<p>restore works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid image-bg">
+        </div>
+        <div class="col">
+            <div class="container">
+                <h1 class="text-secondary">Recuperar</h1>
+                <form class="row g-3" [formGroup]="recuperarForm" (ngSubmit)="recuperar()">
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label text-secondary">Correo</label>
+                        <input type="email" class="form-control" id="inputAddress" formControlName="correo" required>
+                        <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('correo')">
+                            El correo es invalido
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit" [disabled]="recuperarForm.invalid">
+                                Enviar link por correo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="text-secondary">Regresar a el <a routerLink='/auth/login'>Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

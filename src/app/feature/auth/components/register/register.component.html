@@ -1,1 +1,36 @@
-<p>register works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid image-bg">
+        </div>
+        <div class="col">
+            <div class="container">
+                <h1 class="text-secondary">Herogame</h1>
+                <form class="row g-3" [formGroup]="registroForm" (ngSubmit)="registrar()">
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label text-secondary">Correo</label>
+                        <input type="email" class="form-control" id="inputAddress" formControlName="correo" required>
+                        <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('correo')">
+                            El correo es invalido
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label text-secondary">Contraseña</label>
+                        <input type="password" class="form-control" id="inputAddress2" formControlName="contraseña" required>
+                        <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('contraseña')">
+                            La contraseña es requerida
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit" [disabled]="registroForm.invalid">Registrarse</button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="text-secondary">Regresar a el <a routerLink='/auth/login'>Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

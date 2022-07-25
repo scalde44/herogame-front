@@ -1,1 +1,61 @@
-<p>login works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid image-bg">
+        </div>
+        <div class="col">
+            <div class="container">
+                <h1 class="text-secondary">Herogame</h1>
+                <form [formGroup]="iniciarSesionForm" (ngSubmit)="iniciarSesion()" class="row g-3">
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label text-secondary">Correo</label>
+                        <input type="email" class="form-control" id="inputAddress" formControlName="correo" required>
+                        <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('correo')">
+                            El correo es invalido
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label text-secondary">Contraseña</label>
+                        <input type="password" class="form-control" id="inputAddress2" formControlName="contraseña"
+                            required>
+                        <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('contraseña')">
+                            Contraseña es requerida
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label text-secondary">Rol</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="rol" required>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="PLAYER">PLAYER</option>
+                        </select>
+                        <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('rol')">
+                            Debes seleccionar un rol
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit" [disabled]="iniciarSesionForm.invalid">
+                                Iniciar sesión
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="text-secondary">No estas registrado? <a routerLink='/auth/register'>Registrarse</a> o
+                            acaso olvidaste tu contraseña?
+                            <a routerLink='/auth/recovery'>Recuperar</a>
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-danger" type="button" data-toggle="tooltip" data-placement="top"
+                                title="Para iniciar con Google debes seleccionar el rol"
+                                (click)="iniciarConGoogle()">
+                                Iniciar con Google
+                            </button>
+                        </div>                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
