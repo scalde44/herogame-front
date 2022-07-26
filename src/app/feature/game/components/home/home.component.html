@@ -1,1 +1,38 @@
-<p>home works!</p>
+<div class="container">
+    <h1 class="text-secondary">Crear Juego</h1>
+    <form [formGroup]="juegoForm" (ngSubmit)="crearJuego()" class="row g-3">
+        <div class="col-12">
+            <label for="inputAddress" class="form-label text-secondary">Juego</label>
+            <input type="text" class="form-control" id="inputAddress" formControlName="juegoId" required>
+            <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('juegoId')">
+                El id del juego es requerido
+            </div>
+        </div>
+        <div class="col-9">
+            <input type="text" placeholder="jugador id" class="form-control" id="inputAddress2" formControlName="jugadorId"
+                required>
+            <div class="alert alert-danger" role="alert" *ngIf="isValidFieldDatosLoginForm('jugadorId')">
+                Jugador requerido
+            </div>
+        </div>
+        <div class="col-3">            
+            <div class="d-grid gap-2">
+                <a class="btn btn-danger" (click)="agregar()">
+                    agregar
+                </a>
+            </div>
+        </div>
+        <div class="col-12">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let user of jugadoresId"> {{user}}</li>
+            </ul>
+        </div>
+        <div class="col-12">
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit" [disabled]="juegoForm.invalid">
+                    Crear
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
