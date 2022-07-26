@@ -23,8 +23,12 @@ export class AuthService {
         if (res.user?.emailVerified) {
           if (rol === 'ADMIN') {
             this.router.navigate(['admin/home']);
-            this.saveUser(res.user.email as string, res.user.displayName as string, res.user.photoURL as string, 'ADMIN');
           }
+          else {
+            this.router.navigate(['game/home']);
+          }
+          this.saveUser(res.user.email as string, res.user.displayName as string, res.user.photoURL as string, rol);
+
         } else {
           this.alertService.alert(
             AuthUtil.INFO_ICON,
@@ -48,7 +52,7 @@ export class AuthService {
     this.fireauth.createUserWithEmailAndPassword(email, password).then(
       (res) => {
         this.router.navigate(['auth/login']);
-        this.sendEmailForVerification(res.user as firebase.User);    
+        this.sendEmailForVerification(res.user as firebase.User);
       },
       (err) => {
         this.alertService.alert(
@@ -115,8 +119,11 @@ export class AuthService {
       (res) => {
         if (rol === 'ADMIN') {
           this.router.navigate(['admin/home']);
-          this.saveUser(res.user?.email as string, res.user?.displayName as string, res.user?.photoURL as string, 'ADMIN');
         }
+        else {
+          this.router.navigate(['game/home']);
+        }
+        this.saveUser(res.user?.email as string, res.user?.displayName as string, res.user?.photoURL as string, rol);
       },
       (err) => {
         this.alertService.alert(
