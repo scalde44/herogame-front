@@ -12,19 +12,19 @@ const API_ENDPOINT = environment.apiUrl;
 )
 export class CardService {
 
-  url: string ="http://localhost:8080/api"
+  
 
   constructor(private httpClient: HttpClient ) { }
 
  createCard(form:Card): Observable<Card>{
   
-  return this.httpClient.post<Card>(`${API_ENDPOINT}/v1/cards`, form);
+  return this.httpClient.post<Card>(`${API_ENDPOINT}/cards`, form);
 
 }
 
 public updateCard(id:any, form:Card): Observable<String>{
   
-  return this.httpClient.put(`${API_ENDPOINT}/v1/cards/` + id, form, {
+  return this.httpClient.put(`${API_ENDPOINT}/cards/` + id, form, {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
     }),
@@ -35,7 +35,7 @@ public updateCard(id:any, form:Card): Observable<String>{
 
 public deleteCard(id:any): Observable<String>{
   
-  return this.httpClient.delete(`${API_ENDPOINT}/v1/cards/` + id , {
+  return this.httpClient.delete(`${API_ENDPOINT}/cards/` + id , {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
     }),
@@ -47,10 +47,10 @@ public deleteCard(id:any): Observable<String>{
 }
 public getAllCards(): Observable<listCard[]>{
   
-  return this.httpClient.get<listCard[]>(`${API_ENDPOINT}/v1/cards`); 
+  return this.httpClient.get<listCard[]>(`${API_ENDPOINT}/cards`); 
 }
 
 public cardById(id:any): Observable<Getcard>{
-  return this.httpClient.get<Getcard>(`${API_ENDPOINT}/v1/cards/` + id);
+  return this.httpClient.get<Getcard>(`${API_ENDPOINT}/cards/` + id);
 }
 }
