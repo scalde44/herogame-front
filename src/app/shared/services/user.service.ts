@@ -29,6 +29,10 @@ export class UserService {
     return this.httpClient.get<User[]>(`${API_ENDPOINT}/users`);
   }
 
+  public buscarPorCorreo(correo :string): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${API_ENDPOINT}/user/${correo}`);
+  }
+
   public armarUsuario(email: string, name: string, image: string, role: string): User {  
     let user = {
       "name": name || this.armarNombre(email),

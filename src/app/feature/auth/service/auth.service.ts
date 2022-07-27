@@ -27,8 +27,15 @@ export class AuthService {
           else {
             this.router.navigate(['game/home']);
           }
-          this.saveUser(res.user.email as string, res.user.displayName as string, res.user.photoURL as string, rol);
-
+          this.userService.buscarPorCorreo(res.user.email as string).subscribe(existe => {
+            if (!existe) {
+              this.saveUser(
+                res.user?.email as string,
+                res.user?.displayName as string,
+                res.user?.photoURL as string,
+                rol);
+            }
+          });
         } else {
           this.alertService.alert(
             AuthUtil.INFO_ICON,
@@ -123,7 +130,15 @@ export class AuthService {
         else {
           this.router.navigate(['game/home']);
         }
-        this.saveUser(res.user?.email as string, res.user?.displayName as string, res.user?.photoURL as string, rol);
+        this.userService.buscarPorCorreo(res.user?.email as string).subscribe(existe => {
+          if (!existe) {
+            this.saveUser(
+              res.user?.email as string,
+              res.user?.displayName as string,
+              res.user?.photoURL as string,
+              rol);
+          }
+        });
       },
       (err) => {
         this.alertService.alert(
