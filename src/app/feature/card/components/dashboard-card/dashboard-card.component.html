@@ -21,9 +21,10 @@
     </div>
   </div>
 </nav>
+
 <div class="container">
   <br /><br />
-  <h1 class = "centrado">{{title}}</h1>
+  <h1 class="centrado">{{title}}</h1>
   <br />
 
   <button type="submit" class="btn btn-primary" (click)="createCard()">
@@ -31,7 +32,7 @@
   </button>
   <br /><br />
 
-  <table class="table table-hover" class="table-bordered" class="table table-sm">
+  <table class="table table-hover table-striped table-bordered table table-sm">
     <thead class="table-dark">
       <tr>
         <th scope="col">Id</th>
@@ -43,16 +44,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let card of cards" >
+      <tr *ngFor="let card of cards ">
         <th class="pointer" scope="row" (click)="updateCard(card.id)">{{ card.id }}</th>
         <td>{{ card.name }}</td>
         <td>{{ card.power }}</td>
         <td>{{ card.features }}</td>
         <td>{{ card.imageUrl }}</td>
-        <button type="button" class="btn btn-danger" (click)="deleteCard(card.id)" onclick="location.reload()">Delete</button>
-        
+        <button type="button" class="btn btn-danger" (click)="deleteCard(card.id)"
+          onclick="location.reload()">Delete</button>
+
       </tr>
     </tbody>
   </table>
-
+  
 </div>

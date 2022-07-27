@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import {CardService} from '../../service/card.service';
-import {Card} from '../../models/objects/card';
 import {listCard} from '../../models/objects/listcards';
 import { AuthService } from 'src/app/feature/auth/service/auth.service';
 
 @Component({
   selector: 'app-dashboard-card',
   templateUrl: './dashboard-card.component.html',
-  styleUrls: ['./dashboard-card.component.scss']
+  styleUrls: ['./dashboard-card.component.scss'],
+  
 })
 export class DashboardCardComponent implements OnInit {
 
   title: string ="List of Cards";
-
+  page: number=1;
   constructor(
     private cardService: CardService,
     private router: Router,

@@ -69,7 +69,7 @@ export class UpdateCardComponent implements OnInit {
 
   updateCard() {
     let cardId = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(cardId);
+    
     const card: Getcard = {
       id: this.cardForm.get('id')?.value,
       name: this.cardForm.get('name')?.value,
@@ -78,15 +78,23 @@ export class UpdateCardComponent implements OnInit {
       imageUrl: this.cardForm.get('imageUrl')?.value,
     };
     console.log(card);
-    this.cardService.updateCard(cardId, card).subscribe((data) => {
-      console.log(cardId);
-      console.log(data);
-    });
-  }
+    this.cardService.updateCard(cardId, card).subscribe(l => alert('Carta actualizada')
+    )};
 
   addFeature(){
     this.features.push(this.cardForm.get('features')?.value);
-    console.log()
+    
+  }
+
+  isValidFieldDatosLoginForm(field: string): boolean {
+    return this.isValidFieldOfFormGeneral(this.cardForm, field);
+  }
+  
+  isValidFieldOfFormGeneral(form: FormGroup, field: string): boolean {
+    return (
+      (form.get(field)?.dirty || form.get(field)?.touched) as boolean &&
+      form.get(field)?.invalid as boolean
+    );
   }
 
   dashboard() {

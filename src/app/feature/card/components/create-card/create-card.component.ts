@@ -5,6 +5,7 @@ import {CardService} from '../../service/card.service';
 import {Card} from '../../models/objects/card';
 import { AuthService } from 'src/app/feature/auth/service/auth.service';
 
+
 @Component({
   selector: 'app-create-card',
   templateUrl: './create-card.component.html',
@@ -45,9 +46,8 @@ export class CreateCardComponent implements OnInit {
       imageUrl: this.cardForm.get('imageUrl')?.value
     }
     
-    this.cardService.createCard(card).subscribe((data)=>{
-    (data)})
-  }
+    this.cardService.createCard(card).subscribe(l => alert('Carta creada')
+  )};
   dashboard(){
     this.router.navigate(['card/dashboard'])
   }
@@ -62,6 +62,15 @@ export class CreateCardComponent implements OnInit {
   }
 
   
+  isValidFieldDatosLoginForm(field: string): boolean {
+    return this.isValidFieldOfFormGeneral(this.cardForm, field);
+  }
 
+  isValidFieldOfFormGeneral(form: FormGroup, field: string): boolean {
+    return (
+      (form.get(field)?.dirty || form.get(field)?.touched) as boolean &&
+      form.get(field)?.invalid as boolean
+    );
+  }
 }
 
