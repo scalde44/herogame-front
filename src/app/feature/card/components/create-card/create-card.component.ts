@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {CardService} from '../../service/card.service';
 import {Card} from '../../models/objects/card';
+import { AuthService } from 'src/app/feature/auth/service/auth.service';
 
 @Component({
   selector: 'app-create-card',
@@ -17,8 +18,8 @@ export class CreateCardComponent implements OnInit {
   constructor(
     private cardService: CardService,
     private router: Router,
-    private formBuilder: FormBuilder
-    
+    private formBuilder: FormBuilder,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -54,6 +55,10 @@ export class CreateCardComponent implements OnInit {
   addFeature(){
     this.features.push(this.cardForm.get('features')?.value);
     console.log()
+  }
+
+  cerrar() {
+    this.authService.logout();
   }
 
   

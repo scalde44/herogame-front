@@ -13,7 +13,7 @@ export class JuegoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public crearUsuario(CrearJuegoCommand: CrearJuegoCommand): Observable<string> {
+  public crearJuego(CrearJuegoCommand: CrearJuegoCommand): Observable<string> {
     return this.httpClient.post(`${API_ENDPOINT}/game/create`, CrearJuegoCommand, {
       headers: new HttpHeaders({
         'Content-type': 'application/json',

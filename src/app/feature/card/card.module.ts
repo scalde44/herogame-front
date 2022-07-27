@@ -8,6 +8,7 @@ import { UpdateCardComponent } from './components/update-card/update-card.compon
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardService } from './service/card.service';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+import { AuthService } from '../auth/service/auth.service';
 
 
 @NgModule({
@@ -23,6 +24,6 @@ import { DashboardCardComponent } from './components/dashboard-card/dashboard-ca
     FormsModule,
     HttpClientModule
   ],
-  providers: [CardService]
+  providers: [CardService, AuthService]
 })
 export class CardModule { }

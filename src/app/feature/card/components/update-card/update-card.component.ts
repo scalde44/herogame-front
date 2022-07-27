@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { CardService } from '../../service/card.service';
 import { Getcard } from '../../models/objects/getcard';
+import { AuthService } from 'src/app/feature/auth/service/auth.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class UpdateCardComponent implements OnInit {
     private cardService: CardService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -89,5 +91,9 @@ export class UpdateCardComponent implements OnInit {
 
   dashboard() {
     this.router.navigate(['card/dashboard']);
+  }
+
+  cerrar() {
+    this.authService.logout();
   }
 }

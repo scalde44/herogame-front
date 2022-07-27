@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/feature/auth/service/auth.service';
 import { CrearJuegoCommand } from '../../models/crear-juego-command';
 import { JuegoService } from '../../services/juego.service';
 
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private juegoService: JuegoService
+    private juegoService: JuegoService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -43,12 +45,13 @@ export class HomeComponent implements OnInit {
 
   crearJuego(){
     const juego: string = this.juegoForm.get('juegoId')?.value;
-    let crearJuego = {
+    let crearJuego: CrearJuegoCommand = {
       gameId: juego,
       usersId: this.jugadoresId
     };  
+    console.log(crearJuego);
     
-    this.juegoService.crearUsuario(crearJuego as CrearJuegoCommand)
+    this.juegoService.crearJuego(crearJuego)
     .subscribe(l => alert('Juego creado'));
     
   }
@@ -57,7 +60,11 @@ export class HomeComponent implements OnInit {
     const id: string = this.juegoForm.get('jugadorId')?.value;
     if (id !== null) {
       this.jugadoresId.push(id);
-    }   
+    } 
 
+  }
+
+  cerrar() {
+    this.authService.logout();
   }
 }

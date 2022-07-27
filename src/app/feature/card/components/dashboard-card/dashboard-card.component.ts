@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {CardService} from '../../service/card.service';
 import {Card} from '../../models/objects/card';
 import {listCard} from '../../models/objects/listcards';
+import { AuthService } from 'src/app/feature/auth/service/auth.service';
 
 @Component({
   selector: 'app-dashboard-card',
@@ -18,8 +19,7 @@ export class DashboardCardComponent implements OnInit {
   constructor(
     private cardService: CardService,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private authService: AuthService
   ) { }
 
   
@@ -30,10 +30,8 @@ export class DashboardCardComponent implements OnInit {
     this.cardService.getAllCards().subscribe(data =>{
       this.cards = data;
       
-      console.log(data);
-      
-    })
-   
+      console.log(data);      
+    })   
   }
 
   updateCard(id:string){
@@ -52,4 +50,8 @@ export class DashboardCardComponent implements OnInit {
     })
     
   }  
+
+  cerrar() {
+    this.authService.logout();
+  }
 }
