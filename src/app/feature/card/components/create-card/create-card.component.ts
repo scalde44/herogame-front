@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {CardService} from '../../service/card.service';
 import {Card} from '../../models/objects/card';
 import { AuthService } from 'src/app/feature/auth/service/auth.service';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/feature/auth/service/auth.service';
 })
 export class CreateCardComponent implements OnInit {
  
-  title: string = 'Create Card';
+  title: string = 'Crear Carta';
   cardForm : FormGroup;
   features : string[]= [];
   constructor(

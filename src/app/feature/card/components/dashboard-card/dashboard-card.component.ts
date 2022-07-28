@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import {CardService} from '../../service/card.service';
 import {listCard} from '../../models/objects/listcards';
 import { AuthService } from 'src/app/feature/auth/service/auth.service';
+
 
 @Component({
   selector: 'app-dashboard-card',
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/feature/auth/service/auth.service';
 })
 export class DashboardCardComponent implements OnInit {
 
-  title: string ="List of Cards";
+  title: string ="Cartas";
   page: number=1;
   constructor(
     private cardService: CardService,

@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { CardService } from '../../service/card.service';
 import { Getcard } from '../../models/objects/getcard';
 import { AuthService } from 'src/app/feature/auth/service/auth.service';
@@ -18,7 +12,7 @@ import { AuthService } from 'src/app/feature/auth/service/auth.service';
   styleUrls: ['./update-card.component.scss'],
 })
 export class UpdateCardComponent implements OnInit {
-  title: string = 'Update Card';
+  title: string = 'Actualizar Carta';
   card: Getcard ;
   cardForm: FormGroup;
   features : string[]= [];
