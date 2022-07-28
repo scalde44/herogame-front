@@ -5,15 +5,15 @@ import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
 import { Observer } from 'rxjs/internal/types';
 import { environment } from 'src/environments/environment';
 const API_URL = new URL(environment.apiUrl);
-const HOST_API = API_URL.host;
+//const HOST_API = API_URL.host;
+const HOST_API = 'localhost:80';
 const WEBSOCKET_PROTOCOL = API_URL.protocol === 'https:' ? 'wss' : 'ws';
-const WEBSOCKET_URL = `${WEBSOCKET_PROTOCOL}://${HOST_API}/retrieve`;
+const WEBSOCKET_URL = `${WEBSOCKET_PROTOCOL}://${HOST_API}/events`;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WebsocketService {
-
   private subject: AnonymousSubject<MessageEvent>;
   public messages: Subject<any>;
   constructor() {}
@@ -35,7 +35,7 @@ export class WebsocketService {
     return this.subject;
   }
 
-  private create(url:string): AnonymousSubject<MessageEvent> {
+  private create(url: string): AnonymousSubject<MessageEvent> {
     let ws = new WebSocket(url);
     let observable = new Observable((obs: Observer<MessageEvent>) => {
       ws.onmessage = obs.next.bind(obs);
@@ -43,7 +43,7 @@ export class WebsocketService {
       ws.onclose = obs.complete.bind(obs);
       return ws.close.bind(ws);
     });
-    let observer =  {
+    let observer = {
       error: null,
       complete: null,
       next: (data: Object) => {
