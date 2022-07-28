@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/game">Herogame</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="d-flex" role="search">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" (click)="cerrar()">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="tablero col-8" cdkDropList #li1="cdkDropList" [cdkDropListData]="cartasTablero"
+      [cdkDropListConnectedTo]="[li2]"(cdkDropListDropped)="drop($event)">   
+      <h6>Tablero</h6>   
+      <div class="carta" cdkDrag *ngFor="let c of cartasTablero">
+        Nombre => {{c.name}} <br>
+        Poder => {{c.power}} <br>
+        Caracteristicas => {{c.features}}
+      </div>
+    </div>    
+    <div class="col-4" cdkDropList #li2="cdkDropList" [cdkDropListData]="cartasJugador"
+      [cdkDropListConnectedTo]="[li1]" (cdkDropListDropped)="drop($event)">
+      <h6>Cartas</h6>       
+      <div class="carta" cdkDrag *ngFor="let c of cartasJugador">
+        Nombre => {{c.name}} <br>
+        Poder => {{c.power}} <br>
+        Caracteristicas => {{c.features}}
+      </div>
+    </div>
+  </div>
+</div>

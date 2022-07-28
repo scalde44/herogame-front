@@ -1,0 +1,17 @@
+.tablero {
+    height: 100vh;
+    border: turquoise 2px solid;
+    background-color: azure;
+    border-style: outset; 
+}
+
+a {
+    cursor: pointer;
+}
+
+.carta {
+    background-color: bisque;
+    width: 70%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
