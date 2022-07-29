@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat';
 import { AuthUtil } from 'src/app/shared/models/auth-util';
+import { UserGet } from 'src/app/shared/models/user-get';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -27,15 +28,7 @@ export class AuthService {
           else {
             this.router.navigate(['game/home']);
           }
-          this.userService.buscarPorCorreo(res.user.email as string).subscribe(existe => {
-            if (!existe) {
-              this.saveUser(
-                res.user?.email as string,
-                res.user?.displayName as string,
-                res.user?.photoURL as string,
-                rol);
-            }
-          });
+          this.buscarPorCorreo(res, rol);
         } else {
           this.alertService.alert(
             AuthUtil.INFO_ICON,
@@ -93,6 +86,8 @@ export class AuthService {
   logout() {
     this.fireauth.signOut().then(
       () => {
+        localStorage.removeItem('playerId');
+        localStorage.removeItem('gameId');
         this.router.navigate(['auth/login']);
       },
       (err) =>
@@ -130,15 +125,7 @@ export class AuthService {
         else {
           this.router.navigate(['game/home']);
         }
-        this.userService.buscarPorCorreo(res.user?.email as string).subscribe(existe => {
-          if (!existe) {
-            this.saveUser(
-              res.user?.email as string,
-              res.user?.displayName as string,
-              res.user?.photoURL as string,
-              rol);
-          }
-        });
+        this.buscarPorCorreo(res, rol);
       },
       (err) => {
         this.alertService.alert(
@@ -151,12 +138,38 @@ export class AuthService {
     );
   }
 
+  private buscarPorCorreo(res: firebase.auth.UserCredential, rol: string): void {
+    this.userService.buscarPorCorreo(res.user.email).subscribe(user => {
+      if (!user) {
+        this.saveUser(
+          res.user?.email as string,
+          res.user?.displayName as string,
+          res.user?.photoURL as string,
+          rol);
+      } else {
+        console.log(user);
+        
+        this.guardarLocalStorage(JSON.stringify(user));
+      }
+    });
+  }
+
   private saveUser(email: string, userName: string, urlImage: string, rol: string): void {
     let user = this.userService.armarUsuario(email, userName, urlImage, rol);
     console.log(user);
     this.userService.crearUsuario(user)
       .subscribe(
-        l => console.log("resultado peticion", l)
+        user => {
+          console.log("resultado peticion", user);
+          this.guardarLocalStorage(user);
+        }
       );
+  }
+
+  private guardarLocalStorage(user: string): void {
+    let userConverted: UserGet = JSON.parse(user);
+    localStorage.removeItem('playerId');
+    localStorage.setItem('playerId', userConverted.id);
+
   }
 }

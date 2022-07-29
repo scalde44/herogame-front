@@ -20,18 +20,16 @@
       [cdkDropListConnectedTo]="[li2]"(cdkDropListDropped)="drop($event)">   
       <h6>Tablero</h6>   
       <div class="carta" cdkDrag *ngFor="let c of cartasTablero">
-        Nombre => {{c.name}} <br>
-        Poder => {{c.power}} <br>
-        Caracteristicas => {{c.features}}
+        Nombre => {{c.card.name.value}} <br>
+        Poder => {{c.card.power.value}} 
       </div>
     </div>    
     <div class="col-4" cdkDropList #li2="cdkDropList" [cdkDropListData]="cartasJugador"
       [cdkDropListConnectedTo]="[li1]" (cdkDropListDropped)="drop($event)">
       <h6>Cartas</h6>       
       <div class="carta" cdkDrag *ngFor="let c of cartasJugador">
-        Nombre => {{c.name}} <br>
-        Poder => {{c.power}} <br>
-        Caracteristicas => {{c.features}}
+        Nombre => {{c.card.name.value}} <br>
+        Poder => {{c.card.power.value}}
       </div>
     </div>
   </div>

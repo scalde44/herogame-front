@@ -7,9 +7,10 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth/service/auth.service';
 import { TableroComponent } from './components/tablero/tablero.component';
+import { JoinGameComponent } from './components/join-game/join-game.component';
 
 @NgModule({
-  declarations: [HomeComponent, TableroComponent],
+  declarations: [HomeComponent, TableroComponent, JoinGameComponent],
   imports: [CommonModule,
     GameRoutingModule,
     FormsModule,
